@@ -225,7 +225,8 @@ mod tests {
 
     #[test]
     fn test_effective_potential() {
-        let wd = WittenDeformation::new(vec![], vec![], 10);
+        let mut wd = WittenDeformation::new(vec![], vec![], 1);
+        wd.with_t(10.0);
         // V_eff = 0.5 * 4.0 - 0.5 * 2.0 / 10.0 = 2.0 - 0.1 = 1.9
         let v = wd.effective_potential(4.0, 2.0);
         assert_relative_eq!(v, 1.9);
@@ -233,7 +234,8 @@ mod tests {
 
     #[test]
     fn test_large_t_detection() {
-        let wd = WittenDeformation::new(vec![0.0, 1.0], vec![0, 1], 100);
+        let mut wd = WittenDeformation::new(vec![0.0, 1.0], vec![0, 1], 1);
+        wd.with_t(100.0);
         assert!(wd.is_large_t());
     }
 
@@ -245,9 +247,10 @@ mod tests {
 
     #[test]
     fn test_critical_point_eigenvalue() {
-        let wd = WittenDeformation::new(vec![], vec![], 2);
+        let mut wd = WittenDeformation::new(vec![], vec![], 1);
+        wd.with_t(2.0);
         let eigvals = vec![-2.0, 3.0];
-        // λ ≈ t × |μ_0| = 2.0 × 2.0 = 4.0
+        // λ ≈ t × Σ_{i < index} |μ_i| = 2.0 × |-2.0| = 4.0
         let ev = wd.critical_point_eigenvalue(&eigvals, 1);
         assert_relative_eq!(ev, 4.0);
     }
