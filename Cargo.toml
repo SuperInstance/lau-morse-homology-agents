@@ -1,0 +1,17 @@
+[package]
+name = "lau-morse-homology-agents"
+version = "0.1.0"
+edition = "2021"
+description = "Morse theory applied to agent fitness landscapes — topology of the landscape determines learning dynamics"
+license = "MIT"
+repository = "https://github.com/SuperInstance/lau-morse-homology-agents"
+keywords = ["morse-theory", "homology", "agents", "fitness-landscape", "topology"]
+categories = ["mathematics", "science"]
+
+[dependencies]
+nalgebra = { version = "0.33", features = ["serde-serialize"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dev-dependencies]
+approx = "0.5"
